@@ -1,0 +1,28 @@
+{
+  "name": "forkify",
+  "version": "1.0.0",
+  "description": "Recipe Application",
+  "default": "dist/index.html",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-chandershekhar/forkify-app.git"
+  },
+  "author": "Chander Shekhar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dev-chandershekhar/forkify-app/issues"
+  },
+  "homepage": "https://github.com/dev-chandershekhar/forkify-app#readme",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.7.0",
+    "parcel": "^2.7.0"
+  },
+  "dependencies": {
+    "core-js": "^3.25.0",
+    "regenerator-runtime": "^0.13.9"
+  }
+}
