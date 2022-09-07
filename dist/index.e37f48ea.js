@@ -564,7 +564,7 @@ const controlSearchResults = async function() {
         const query = (0, _searchViewJsDefault.default).getQuery();
         if (!query) return;
         await _modelJs.loadSearchResult(query);
-        (0, _resultsViewJsDefault.default).render(_modelJs.state.search.results);
+        (0, _resultsViewJsDefault.default).render(_modelJs.getSearchResultPage());
     } catch (err) {
         console.log(err);
     }
@@ -1689,6 +1689,7 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadRecipe", ()=>loadRecipe);
 parcelHelpers.export(exports, "loadSearchResult", ()=>loadSearchResult);
+parcelHelpers.export(exports, "getSearchResultPage", ()=>getSearchResultPage);
 var _regeneratorRuntime = require("regenerator-runtime");
 var _configJs = require("./config.js");
 var _helpersJs = require("./helpers.js");
@@ -1696,7 +1697,9 @@ const state = {
     recipe: {},
     search: {
         query: "",
-        results: []
+        results: [],
+        page: 1,
+        resultsPerPage: 10
     }
 };
 const loadRecipe = async function(id) {
@@ -1735,7 +1738,12 @@ const loadSearchResult = async function(query) {
         throw err;
     }
 };
-loadSearchResult("pizza");
+const getSearchResultPage = function(page = state.search.page) {
+    state.search.page = page;
+    const start = (page - 1) * state.search.resultsPerPage;
+    const end = page * state.search.resultsPerPage;
+    return state.search.results.slice(start, end);
+};
 
 },{"regenerator-runtime":"dXNgZ","./config.js":"k5Hzs","./helpers.js":"hGI1E","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dXNgZ":[function(require,module,exports) {
 /**
@@ -2865,10 +2873,9 @@ class ResultsView extends (0, _viewJsDefault.default) {
     _errorMessage = "No Recipe found for your query! Please try again ;";
     _message = "";
     _generateMarkup() {
-        console.log(this._data);
-        return this._data.map(this.__generateMarkupPreview).join("");
+        return this._data.map(this._generateMarkupPreview).join("");
     }
-    __generateMarkupPreview(result) {
+    _generateMarkupPreview(result) {
         return `
       <li class="preview">
         <a class="preview__link" href="#${result.id}">
