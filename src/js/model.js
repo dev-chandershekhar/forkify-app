@@ -1,5 +1,6 @@
 import { async } from 'regenerator-runtime';
 import { API_URL } from './config.js';
+import { REC_PER_PAGE } from './config.js';
 import { getJSON } from './helpers.js';
 
 export const state = {
@@ -8,7 +9,7 @@ export const state = {
     query: '',
     results: [],
     page: 1,
-    resultsPerPage: 10,
+    resultsPerPage: REC_PER_PAGE,
   }
 };
 
