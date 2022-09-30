@@ -12,6 +12,27 @@ export default class View {
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
+  update(data) {
+    if (!data || (Array.isArray(data) && data.length === 0)) return this.renderError();
+
+    this._data = data;
+    const newMarkup = this._generateMarkup();
+    
+    const newDom = document.createRange().createContextualFragment(newMarkup);
+    const newElements = Array.from(newDom.querySelectorAll('*'));
+    const curElement = Array.from(this._parentElement.querySelectorAll('*'));
+
+    newElements.forEach((newEl, i) => {
+      const curEl = curElement[i];
+      console.log(curEl, newEl.isEqualNode(curEl));
+
+      if (!newEl.isEqualNode(curEl)) {
+        curEl.textContent = newEl.textContent;
+      }
+    }); 
+    console.log(newElements, curElement);
+  }
+
   _clear() {
     this._parentElement.innerHTML = '';
   }
