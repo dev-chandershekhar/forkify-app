@@ -1,9 +1,9 @@
 import View from './view.js';
 import icons from 'url:../../img/icons.svg';
 
-class ResultsView extends View {
-  _parentElement = document.querySelector('.results');
-  _errorMessage = 'No Recipe found for your query! Please try again ;';
+class BookmarksViews extends View {
+  _parentElement = document.querySelector('.bookmarks__list');
+  _errorMessage = 'No Bookmark yet, find a nice recipe and bookmarked it ;';
   _message = '';
 
   _generateMarkup() {
@@ -29,4 +29,4 @@ class ResultsView extends View {
   }
 }
 
-export default new ResultsView();
+export default new BookmarksViews();
